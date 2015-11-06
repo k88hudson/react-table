@@ -1,0 +1,49 @@
+{
+  "name": "react-table",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel watch:* server",
+    "watch:js": "webpack -w -d",
+    "watch:css": "node-sass ./src/demo -o ./www -w",
+    "watch:static": "cpx \"src/static/**/*\" www",
+    "server": "live-server --port=1944",
+    "test": "karma start"
+  },
+  "author": "",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "autoless": "^0.1.7",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "cpx": "^1.2.1",
+    "eslint": "^1.7.1",
+    "karma": "^0.13.11",
+    "karma-babel-preprocessor": "^5.2.2",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.1.1",
+    "karma-sourcemap-loader": "^0.3.6",
+    "karma-webpack": "^1.7.0",
+    "live-server": "^0.8.1",
+    "lodash": "^3.10.1",
+    "lodash.clone": "^3.0.3",
+    "mocha": "^2.3.3",
+    "node-sass": "^3.4.1",
+    "npm-run-all": "^1.2.12",
+    "webpack": "^1.12.2",
+    "webpack-notifier": "^1.2.1"
+  },
+  "dependencies": {
+    "faker": "^3.0.1",
+    "ionicons": "^2.0.1",
+    "moment": "^2.10.6",
+    "react": "^0.14.0",
+    "react-autocomplete": "^0.1.4",
+    "react-dom": "^0.14.0",
+    "react-router": "^1.0.0-rc3",
+    "react-select": "^0.9.1"
+  }
+}

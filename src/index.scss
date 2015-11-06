@@ -1,0 +1,129 @@
+$grey: #F8FAFC;
+$midgrey: #808FA3;
+$greyborder: #E7E9ED;
+$pink: #D76381;
+$darkgrey: #5C5D6F;
+$tblHzPadding: 25px;
+
+.table {
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border-bottom: 1px solid $greyborder;
+  }
+
+  th {
+    font-size: 0.8em;
+    padding: 16px $tblHzPadding;
+    text-align: left;
+    font-weight: bold;
+    background-color: white;
+    color: darken($midgrey, 20%);
+    border-top: 1px solid $greyborder;
+    border-bottom: 1px solid $greyborder;
+    cursor: pointer;
+    .carrot {
+      line-height: 1;
+      margin-left: 2px;
+      font-family: sans-serif;
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      color: lighten($darkgrey, 20%);
+      &::after {
+        content: "\25BE"
+      }
+      top: -1px;
+      &.up {
+        top: 0;
+        transform: rotate(180deg);
+      }
+    }
+    &.selected .carrot {
+      opacity: 1;
+      color: $pink;
+    }
+    &:hover {
+      background: $grey;
+      .carrot {opacity: 1}
+    }
+
+
+    &.settings {
+      padding: 0;
+      width: 20px;
+
+      // background: $pink;
+      // border: none;
+      // color: white;
+      // border-radius: 0 3px 3px 0;
+      // &:hover {
+      //   background: lighten($pink, 5%);
+      // }
+
+      color: $pink;
+
+      text-align: center;
+      position: relative;
+      user-select: none;
+
+      button {
+        color: inherit;
+        background: none;
+        border: none;
+        font-size: 24px;
+        &:focus {
+          outline: none;
+        }
+        &::after {
+          position: relative;
+          content: "...";
+          top: -0.3em;
+        }
+      }
+    
+      .menu {
+        text-align: left;
+        background: white;
+        color: $darkgrey;
+        border: 1px solid #DDD;
+        position: absolute;
+        top: 100%;
+        right: 1px;
+        margin: 0;
+        padding: 5px;
+        list-style: none;
+        z-index: 1;
+        white-space: nowrap;
+        font-size: 13px;
+        li {
+          margin: 0;
+          padding: 4px 10px;
+          input {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+  }
+
+  td {
+    padding: 8px $tblHzPadding;
+  }
+
+  tr:nth-child(even) td {
+    background: $grey;
+  }
+
+  tr:last-child {
+    td {
+      border-bottom: none;
+    }
+  }
+
+}
