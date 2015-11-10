@@ -2,13 +2,13 @@
   "name": "react-table",
   "version": "0.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "npm-run-all --parallel watch:* server",
     "watch:js": "webpack -w -d",
     "watch:css": "node-sass ./src/demo -o ./www -w",
     "watch:static": "cpx \"src/static/**/*\" www",
-    "server": "live-server --port=1944",
+    "server": "live-server --port=1941",
     "build": "mkdir -p dist && babel --presets es2015,react ./src/index.js --out-file ./dist/index.js",
     "test": "karma start"
   },
@@ -48,6 +48,7 @@
     "webpack-notifier": "^1.2.1"
   },
   "dependencies": {
+    "classnames": "^2.2.0",
     "lodash.clone": "^3.0.3"
   }
 }

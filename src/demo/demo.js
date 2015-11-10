@@ -19,6 +19,7 @@ const Demo = React.createClass({
   render: function () {
     return (<div>
       <Table fields={fields} data={data} fieldsEditable />
+      <Table fields={['name', 'age', 'fav_color']} data={data} fieldsEditable />
     </div>);
   }
 });

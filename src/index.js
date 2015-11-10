@@ -1,5 +1,6 @@
 const React = require('react');
 const clone = require('lodash.clone');
+const classNames = require('classnames');
 
 const MenuItem = React.createClass({
   render: function() {
@@ -26,12 +27,21 @@ const Table = React.createClass({
     };
   },
   fields: function () {
-    const fields = clone(this.props.fields);
+    let fields;
+
+    if (this.props.fields instanceof Array) {
+      fields = {};
+      this.props.fields.forEach(field => fields[field] = {});
+    } else {
+      fields = clone(this.props.fields);
+    }
+
     const arr = [];
 
-    Object.keys(this.props.fields).map(key => {
+    Object.keys(fields).map(key => {
       const field = fields[key];
       field.key = key;
+      if (!field.label) field.label = field.key;
       if (!field.format) field.format = (row) => row[field.key];
       if (!field.raw) field.raw = (row) => row[field.key];
       arr.push(field);
@@ -81,7 +91,7 @@ const Table = React.createClass({
     const rows = this.sort(this.props.data, this.state.sortBy, this.state.sortOrder);
     const fields = this.fields()._asArray;
 
-    return (<div className="table">
+    return (<div className={classNames('table', this.props.className)}>
       <table>
         <thead>
           <tr>
