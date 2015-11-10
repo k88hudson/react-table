@@ -61,7 +61,6 @@ const Table = React.createClass({
       } else {
         return (x > y ? 1 : -1) * sortOrder;
       }
-      
     };
     return rows.sort((x, y) => sort(field.raw(x), field.raw(y)));
   },
