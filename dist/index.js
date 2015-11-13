@@ -31,7 +31,7 @@ var Table = React.createClass({
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
     if (this.props.fields === nextProps.fields) return;
     this.setState({
-      sortBy: Object.keys(this.props.fields)[0]
+      sortBy: Object.keys(nextProps.fields)[0]
     });
   },
   fields: function fields() {
@@ -78,7 +78,7 @@ var Table = React.createClass({
   sort: function sort(rows, sortBy, sortOrder) {
     rows = rows.slice();
 
-    var field = this.fields()[sortBy];
+    var field = this.fields()[sortBy] || this.fields()._asArray[0];
     var sort = field.sort || function (x, y) {
       if (typeof x === 'number' && typeof y === 'number') {
         return (x - y) * sortOrder;

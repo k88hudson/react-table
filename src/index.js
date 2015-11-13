@@ -29,7 +29,7 @@ const Table = React.createClass({
   componentWillReceiveProps: function (nextProps) {
     if (this.props.fields === nextProps.fields) return;
     this.setState({
-      sortBy: Object.keys(this.props.fields)[0]
+      sortBy: Object.keys(nextProps.fields)[0]
     });
   },
   fields: function () {
@@ -70,7 +70,7 @@ const Table = React.createClass({
   sort: function (rows, sortBy, sortOrder) {
     rows = rows.slice();
 
-    const field = this.fields()[sortBy];
+    const field = this.fields()[sortBy] || this.fields()._asArray[0];
     const sort = field.sort || function (x, y) {
       if (typeof x === 'number' && typeof y === 'number') {
         return (x - y) * sortOrder;
