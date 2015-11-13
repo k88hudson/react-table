@@ -21,10 +21,16 @@ const Table = React.createClass({
   },
   getInitialState: function () {
     return {
-      sortBy: this.props.sortBy || this.fields()._asArray[0].key || '',
+      sortBy: this.props.sortBy || Object.keys(this.props.fields)[0] || '',
       sortOrder: 1,
       hiddenFields: {}
     };
+  },
+  componentWillReceiveProps: function (nextProps) {
+    if (this.props.fields === nextProps.fields) return;
+    this.setState({
+      sortBy: Object.keys(this.props.fields)[0]
+    });
   },
   fields: function () {
     let fields;

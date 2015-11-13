@@ -23,10 +23,16 @@ var Table = React.createClass({
   },
   getInitialState: function getInitialState() {
     return {
-      sortBy: this.props.sortBy || this.fields()._asArray[0].key || '',
+      sortBy: this.props.sortBy || Object.keys(this.props.fields)[0] || '',
       sortOrder: 1,
       hiddenFields: {}
     };
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (this.props.fields === nextProps.fields) return;
+    this.setState({
+      sortBy: Object.keys(this.props.fields)[0]
+    });
   },
   fields: function fields() {
     var fields = undefined;
