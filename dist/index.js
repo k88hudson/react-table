@@ -17,13 +17,30 @@ var MenuItem = React.createClass({
   }
 });
 
+function isEmpty(fields, data) {
+  if (!fields || !fields.length || !data || !data.length) {
+    return true;
+  }
+}
+
+function findInArray(key, value, arr) {
+  var result = undefined;
+  arr.forEach(function (item) {
+    if (item[key] === value) result = item;
+  });
+  return result;
+}
+
 var Table = React.createClass({
   getDefaultProps: function getDefaultProps() {
     fieldsEditable: false;
   },
   getInitialState: function getInitialState() {
+    var fields = this.fields();
+    var sortBy = this.props.sortBy || fields[0] && fields[0].key || null;
+
     return {
-      sortBy: this.props.sortBy || Object.keys(this.props.fields)[0] || '',
+      sortBy: sortBy,
       sortOrder: 1,
       hiddenFields: {}
     };
@@ -35,22 +52,9 @@ var Table = React.createClass({
     });
   },
   fields: function fields() {
-    var fields = undefined;
-
-    if (this.props.fields instanceof Array) {
-      fields = {};
-      this.props.fields.forEach(function (field) {
-        return fields[field] = {};
-      });
-    } else {
-      fields = clone(this.props.fields);
-    }
-
-    var arr = [];
-
-    Object.keys(fields).map(function (key) {
-      var field = fields[key];
-      field.key = key;
+    if (!this.props.fields) return [];
+    var fields = this.props.fields.map(function (field) {
+      field = typeof field == 'string' ? { key: field } : clone(field);
       if (!field.label) field.label = field.key;
       if (!field.format) field.format = function (row) {
         return row[field.key];
@@ -58,11 +62,8 @@ var Table = React.createClass({
       if (!field.raw) field.raw = function (row) {
         return row[field.key];
       };
-      arr.push(field);
+      return field;
     });
-
-    fields._asArray = arr;
-
     return fields;
   },
   isHidden: function isHidden(field) {
@@ -77,8 +78,9 @@ var Table = React.createClass({
   },
   sort: function sort(rows, sortBy, sortOrder) {
     rows = rows.slice();
+    var fields = this.fields();
 
-    var field = this.fields()[sortBy] || this.fields()._asArray[0];
+    var field = findInArray('key', sortBy, fields) || fields[0];
     var sort = field.sort || function (x, y) {
       if (typeof x === 'number' && typeof y === 'number') {
         return (x - y) * sortOrder;
@@ -102,11 +104,22 @@ var Table = React.createClass({
     var icon = selected && this.state.sortOrder === -1 ? 'up' : 'down';
     return React.createElement('span', { className: 'carrot ' + icon });
   },
+  renderEmpty: function renderEmpty() {
+    return this.props.empty || React.createElement(
+      'div',
+      null,
+      'No data'
+    );
+  },
   render: function render() {
     var _this = this;
 
-    var rows = this.sort(this.props.data, this.state.sortBy, this.state.sortOrder);
-    var fields = this.fields()._asArray;
+    var p = this.props;
+
+    if (isEmpty(p.fields, p.data)) return this.renderEmpty(p.fields, p.data);
+
+    var rows = this.sort(p.data, this.state.sortBy, this.state.sortOrder);
+    var fields = this.fields();
 
     return React.createElement(
       'div',

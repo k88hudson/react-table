@@ -3,11 +3,11 @@ const ReactDOM = require('react-dom');
 
 const {Table} = require('../index');
 
-const fields = {
-  name: {label: 'Name'},
-  age: {label: 'Age'},
-  fav_color: {label: 'Favourite Colour'}
-};
+const fields = [
+  {key: 'name', label: 'Name'},
+  {key: 'age', label: 'Age'},
+  {key: 'fav_color', label: 'Favourite Colour'}
+];
 
 const data = [
   {name: 'François Duras', age: 43, fav_color: 'bleue'},
@@ -20,6 +20,7 @@ const Demo = React.createClass({
     return (<div>
       <Table fields={fields} data={data} fieldsEditable />
       <Table fields={['name', 'age', 'fav_color']} data={data} fieldsEditable />
+      <Table fields={null} data={null} />
     </div>);
   }
 });
