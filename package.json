@@ -4,12 +4,16 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "npm-run-all --parallel watch:* server",
-    "watch:js": "webpack -w -d",
-    "watch:css": "node-sass ./src/demo -o ./www -w",
-    "watch:static": "cpx \"src/static/**/*\" www",
-    "server": "live-server --port=1941",
-    "build": "mkdir -p dist && babel --presets es2015,react ./src/index.js --out-file ./dist/index.js",
+    "build": "babel --presets es2015,react ./src/index.js --out-file ./dist/index.js",
+      "prebuild": "mkdir -p dist",
+
+    "start": "npm run build && npm-run-all --parallel watch:* server",
+      "watch:dist": "npm run build -- --watch",
+      "watch:js": "webpack -w -d",
+      "watch:css": "node-sass ./src/demo -o ./www -w",
+      "watch:static": "cpx \"src/static/**/*\" www",
+      "server": "live-server --port=1941",
+
     "test": "karma start"
   },
   "author": "",
