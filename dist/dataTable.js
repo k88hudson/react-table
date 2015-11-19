@@ -117,7 +117,7 @@ var DataTable = (function () {
       }).join(',') + '\n';
       var body = data.map(function (info) {
         return fields.map(function (field) {
-          return field.format(info);
+          return field.format(field.raw(info));
         }).join(',');
       }).join('\n');
 

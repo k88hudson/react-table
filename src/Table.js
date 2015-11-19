@@ -38,6 +38,15 @@ export default React.createClass({
     }
   },
 
+  download: function (fileName='data.csv') {
+    const el = document.createElement('a');
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent('click');
+    el.download = fileName;
+    el.href = this.Data.csv;
+    el.dispatchEvent(event);
+  },
+
   getCarrot: function(field) {
     const selected = this.state.sortBy === field.key;
     const icon = (selected && this.state.sortOrder === -1) ? 'up' : 'down';

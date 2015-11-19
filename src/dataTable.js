@@ -70,7 +70,7 @@ export default class DataTable {
     const headerString = 'data:text/csv;charset=utf-8,';
     const head = fields.map(f => f.label).join(',') + '\n';
     const body = data.map(info => {
-      return fields.map(field => field.format(info)).join(',');
+      return fields.map(field => field.format(field.raw(info))).join(',');
     }).join('\n');
 
     return headerString + encodeURI(head + body);

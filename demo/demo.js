@@ -33,8 +33,9 @@ const Demo = React.createClass({
       <p>
         <button onClick={this.addRow}>add row</button>
         <button onClick={this.removeRow}>remove row</button>
+        <a href="#" onClick={() => this.refs.table.download('coolstuff.csv')}>Download as csv</a>
       </p>
-      <Table fields={this.state.fields} data={this.state.data} fieldsEditable />
+      <Table ref="table" fields={this.state.fields} data={this.state.data} fieldsEditable />
       <Table fields={['name', 'age', 'fav_color']} data={this.state.data} fieldsEditable />
       <Table fields={null} data={null} />
     </div>);

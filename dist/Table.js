@@ -59,6 +59,17 @@ exports.default = _react2.default.createClass({
     }
   },
 
+  download: function download() {
+    var fileName = arguments.length <= 0 || arguments[0] === undefined ? 'data.csv' : arguments[0];
+
+    var el = document.createElement('a');
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent('click');
+    el.download = fileName;
+    el.href = this.Data.csv;
+    el.dispatchEvent(event);
+  },
+
   getCarrot: function getCarrot(field) {
     var selected = this.state.sortBy === field.key;
     var icon = selected && this.state.sortOrder === -1 ? 'up' : 'down';
