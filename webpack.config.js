@@ -1,6 +1,6 @@
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const srcPath = './src/demo/demo.js';
+const srcPath = './demo/demo.js';
 const distDir = './www';
 const distFilename = 'index.bundle.js'
 

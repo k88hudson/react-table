@@ -2,18 +2,17 @@
   "name": "react-table",
   "version": "0.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./react-table.js",
   "scripts": {
-    "build": "babel --presets es2015,react ./src/index.js --out-file ./dist/index.js",
-      "prebuild": "mkdir -p dist",
-
+    "build": "babel --presets es2015,react ./src --out-dir ./dist",
+    "prebuild": "rm -rf dist && mkdir dist",
     "start": "npm run build && npm-run-all --parallel watch:* server",
-      "watch:dist": "npm run build -- --watch",
-      "watch:js": "webpack -w -d",
-      "watch:css": "node-sass ./src/demo -o ./www -w",
-      "watch:static": "cpx \"src/static/**/*\" www",
-      "server": "live-server --port=1941",
-
+    "prestart": "rm -rf www && mkdir www",
+    "watch:dist": "npm run build -- --watch",
+    "watch:js": "webpack -w -d",
+    "watch:css": "node-sass ./demo -o ./www -w",
+    "watch:static": "cpx \"src/static/**/*\" www",
+    "server": "live-server --port=1989",
     "test": "karma start"
   },
   "author": "",
@@ -29,17 +28,17 @@
     "eslint": "^1.7.1",
     "faker": "^3.0.1",
     "ionicons": "^2.0.1",
-    "karma": "^0.13.11",
+    "karma": "^0.13.15",
     "karma-babel-preprocessor": "^5.2.2",
     "karma-chrome-launcher": "^0.2.1",
     "karma-firefox-launcher": "^0.1.6",
-    "karma-mocha": "^0.2.0",
+    "karma-mocha": "^0.2.1",
     "karma-mocha-reporter": "^1.1.1",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-webpack": "^1.7.0",
     "live-server": "^0.8.1",
     "lodash": "^3.10.1",
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.4",
     "moment": "^2.10.6",
     "node-sass": "^3.4.1",
     "npm-run-all": "^1.2.12",
@@ -48,11 +47,12 @@
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3",
     "react-select": "^0.9.1",
-    "webpack": "^1.12.2",
+    "webpack": "^1.12.6",
     "webpack-notifier": "^1.2.1"
   },
   "dependencies": {
     "classnames": "^2.2.0",
-    "lodash.clone": "^3.0.3"
+    "lodash.clone": "^3.0.3",
+    "react-computed": "k88hudson/react-computed"
   }
 }
