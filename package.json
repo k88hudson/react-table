@@ -13,7 +13,9 @@
     "watch:css": "node-sass ./demo -o ./www -w",
     "watch:static": "cpx \"src/static/**/*\" www",
     "server": "live-server --port=1989",
-    "test": "karma start"
+    "test": "karma start",
+    "preversion": "npm run build",
+    "postversion": "npm publish && git push origin master"
   },
   "author": "",
   "license": "MPL-2.0",
