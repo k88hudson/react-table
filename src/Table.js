@@ -63,55 +63,53 @@ export default React.createClass({
 
     if (!fields.length || !rows.length) return this.renderEmpty();
 
-    return (<div className={classNames('table', this.props.className)}>
-      <table>
-        <thead>
-          <tr>
-            {fields.map(field => {
-              return (<th key={field.key}
-                hidden={this.isHidden(field.key)}
-                className={this.state.sortBy === field.key && 'selected'}
-                onClick={() => this.setSort(field)}>
-                  {field.label} {this.getCarrot(field)}
-              </th>);
-            })}
-            <th className="settings" hidden={!this.props.fieldsEditable}>
-              <button className="settings-btn" onClick={() => this.setState({showMenu: !this.state.showMenu})}>
-              </button>
-              <ul className="menu" hidden={!this.state.showMenu}>
-                {fields.map(field => {
-                  return (<MenuItem key={field.key}
-                      value={!this.isHidden(field.key)}
-                      label={field.label}
-                      onChange={(e) => this.setVisibility(field.key, e.target.checked)} />
-                  );
-                })}
-              </ul>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => {
-            return (<tr key={i}>
-              {fields.map(field => <td key={field.key} hidden={this.isHidden(field.key)}>{field.format(field.raw(row), row)}</td>)}
-              <td hidden={!this.props.fieldsEditable} />
-            </tr>);
+    return (<table className={classNames('table', this.props.className)}>
+      <thead>
+        <tr>
+          {fields.map(field => {
+            return (<th key={field.key}
+              hidden={this.isHidden(field.key)}
+              className={this.state.sortBy === field.key && 'selected'}
+              onClick={() => this.setSort(field)}>
+                {field.label} {this.getCarrot(field)}
+            </th>);
           })}
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>Total</th>
-            {fields.slice(1).map(field => {
-              const sum = field.sum && rows.map(r => field.raw(r)).reduce((a, b) => field.sum(a, b));
-              return (<th key={field.key} hidden={this.isHidden(field.key)}>
-                {sum}
-              </th>);
-            })}
-            <th hidden={!this.props.fieldsEditable} />
-          </tr>
-        </tfoot>
-      </table>
-    </div>);
+          <th className="settings" hidden={!this.props.fieldsEditable}>
+            <button className="settings-btn" onClick={() => this.setState({showMenu: !this.state.showMenu})}>
+            </button>
+            <ul className="menu" hidden={!this.state.showMenu}>
+              {fields.map(field => {
+                return (<MenuItem key={field.key}
+                    value={!this.isHidden(field.key)}
+                    label={field.label}
+                    onChange={(e) => this.setVisibility(field.key, e.target.checked)} />
+                );
+              })}
+            </ul>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, i) => {
+          return (<tr key={i}>
+            {fields.map(field => <td key={field.key} hidden={this.isHidden(field.key)}>{field.format(field.raw(row), row)}</td>)}
+            <td hidden={!this.props.fieldsEditable} />
+          </tr>);
+        })}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          {fields.slice(1).map(field => {
+            const sum = field.sum && rows.map(r => field.raw(r)).reduce((a, b) => field.sum(a, b));
+            return (<th key={field.key} hidden={this.isHidden(field.key)}>
+              {sum}
+            </th>);
+          })}
+          <th hidden={!this.props.fieldsEditable} />
+        </tr>
+      </tfoot>
+    </table>);
   },
 
   setSort: function(field) {
