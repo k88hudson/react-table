@@ -1,5 +1,5 @@
 {
-  "name": "react-table",
+  "name": "react-tabular",
   "version": "0.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.0",
-    "lodash.clone": "^3.0.3",
-    "react-computed": "k88hudson/react-computed"
+    "lodash.clone": "^3.0.3"
   }
 }
