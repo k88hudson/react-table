@@ -93,95 +93,91 @@ exports.default = _react2.default.createClass({
     if (!fields.length || !rows.length) return this.renderEmpty();
 
     return _react2.default.createElement(
-      'div',
+      'table',
       { className: (0, _classnames2.default)('table', this.props.className) },
       _react2.default.createElement(
-        'table',
+        'thead',
         null,
         _react2.default.createElement(
-          'thead',
+          'tr',
           null,
-          _react2.default.createElement(
-            'tr',
-            null,
-            fields.map(function (field) {
-              return _react2.default.createElement(
-                'th',
-                { key: field.key,
-                  hidden: _this.isHidden(field.key),
-                  className: _this.state.sortBy === field.key && 'selected',
-                  onClick: function onClick() {
-                    return _this.setSort(field);
-                  } },
-                field.label,
-                ' ',
-                _this.getCarrot(field)
-              );
-            }),
-            _react2.default.createElement(
+          fields.map(function (field) {
+            return _react2.default.createElement(
               'th',
-              { className: 'settings', hidden: !this.props.fieldsEditable },
-              _react2.default.createElement('button', { className: 'settings-btn', onClick: function onClick() {
-                  return _this.setState({ showMenu: !_this.state.showMenu });
-                } }),
-              _react2.default.createElement(
-                'ul',
-                { className: 'menu', hidden: !this.state.showMenu },
-                fields.map(function (field) {
-                  return _react2.default.createElement(_MenuItem2.default, { key: field.key,
-                    value: !_this.isHidden(field.key),
-                    label: field.label,
-                    onChange: function onChange(e) {
-                      return _this.setVisibility(field.key, e.target.checked);
-                    } });
-                })
-              )
+              { key: field.key,
+                hidden: _this.isHidden(field.key),
+                className: _this.state.sortBy === field.key && 'selected',
+                onClick: function onClick() {
+                  return _this.setSort(field);
+                } },
+              field.label,
+              ' ',
+              _this.getCarrot(field)
+            );
+          }),
+          _react2.default.createElement(
+            'th',
+            { className: 'settings', hidden: !this.props.fieldsEditable },
+            _react2.default.createElement('button', { className: 'settings-btn', onClick: function onClick() {
+                return _this.setState({ showMenu: !_this.state.showMenu });
+              } }),
+            _react2.default.createElement(
+              'ul',
+              { className: 'menu', hidden: !this.state.showMenu },
+              fields.map(function (field) {
+                return _react2.default.createElement(_MenuItem2.default, { key: field.key,
+                  value: !_this.isHidden(field.key),
+                  label: field.label,
+                  onChange: function onChange(e) {
+                    return _this.setVisibility(field.key, e.target.checked);
+                  } });
+              })
             )
           )
-        ),
-        _react2.default.createElement(
-          'tbody',
-          null,
-          rows.map(function (row, i) {
-            return _react2.default.createElement(
-              'tr',
-              { key: i },
-              fields.map(function (field) {
-                return _react2.default.createElement(
-                  'td',
-                  { key: field.key, hidden: _this.isHidden(field.key) },
-                  field.format(field.raw(row), row)
-                );
-              }),
-              _react2.default.createElement('td', { hidden: !_this.props.fieldsEditable })
-            );
-          })
-        ),
-        _react2.default.createElement(
-          'tfoot',
-          null,
-          _react2.default.createElement(
+        )
+      ),
+      _react2.default.createElement(
+        'tbody',
+        null,
+        rows.map(function (row, i) {
+          return _react2.default.createElement(
             'tr',
-            null,
-            _react2.default.createElement(
-              'th',
-              null,
-              'Total'
-            ),
-            fields.slice(1).map(function (field) {
-              var sum = field.sum && rows.map(function (r) {
-                return field.raw(r);
-              }).reduce(function (a, b) {
-                return field.sum(a, b);
-              });
+            { key: i },
+            fields.map(function (field) {
               return _react2.default.createElement(
-                'th',
+                'td',
                 { key: field.key, hidden: _this.isHidden(field.key) },
-                sum
+                field.format(field.raw(row), row)
               );
             }),
-            _react2.default.createElement('th', { hidden: !this.props.fieldsEditable })
-          )
+            _react2.default.createElement('td', { hidden: !_this.props.fieldsEditable })
+          );
+        })
+      ),
+      _react2.default.createElement(
+        'tfoot',
+        null,
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'th',
+            null,
+            'Total'
+          ),
+          fields.slice(1).map(function (field) {
+            var sum = field.sum && rows.map(function (r) {
+              return field.raw(r);
+            }).reduce(function (a, b) {
+              return field.sum(a, b);
+            });
+            return _react2.default.createElement(
+              'th',
+              { key: field.key, hidden: _this.isHidden(field.key) },
+              sum
+            );
+          }),
+          _react2.default.createElement('th', { hidden: !this.props.fieldsEditable })
         )
       )
     );
