@@ -101,9 +101,14 @@ export default React.createClass({
         <tr>
           <th>Total</th>
           {fields.slice(1).map(field => {
-            const sum = field.sum && rows.map(r => field.raw(r)).reduce((a, b) => field.sum(a, b));
+            let summary;
+            if (field.summary) {
+              summary = field.summary(rows);
+            } else if (field.sum) {
+              summary = field.sum && rows.map(r => field.raw(r)).reduce((a, b) => field.sum(a, b));
+            }
             return (<th key={field.key} hidden={this.isHidden(field.key)}>
-              {sum}
+              {summary}
             </th>);
           })}
           <th hidden={!this.props.fieldsEditable} />

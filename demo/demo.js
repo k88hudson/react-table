@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 
 import Table from '../src/Table';
 
+function averageAge(rows) {
+  const total = rows.reduce((prev, next) => {
+    return prev + next.age;
+  }, 0);
+  return Math.round(total / rows.length);
+}
+
 const Demo = React.createClass({
   getInitialState: function () {
     return {
       fields: [
         {key: 'name', label: 'Name'},
-        {key: 'age', label: 'Age'},
+        {key: 'age', label: 'Age', summary: averageAge},
         {key: 'fav_color', label: 'Favourite Colour'}
       ],
       data: [

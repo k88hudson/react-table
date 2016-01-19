@@ -1,0 +1,84 @@
+.table table {
+  width: 100%;
+  border-collapse: collapse; }
+
+.table th, .table td {
+  border-bottom: 1px solid #E7E9ED; }
+
+.table th {
+  font-size: 0.8em;
+  padding: 16px 25px;
+  text-align: left;
+  font-weight: bold;
+  background-color: white;
+  color: #4f5c6e;
+  border-top: 1px solid #E7E9ED;
+  border-bottom: 1px solid #E7E9ED;
+  cursor: pointer; }
+  .table th .carrot {
+    line-height: 1;
+    margin-left: 2px;
+    font-family: sans-serif;
+    position: relative;
+    display: inline-block;
+    opacity: 0;
+    color: #8f90a2;
+    top: -1px; }
+    .table th .carrot::after {
+      content: "\25BE"; }
+    .table th .carrot.up {
+      top: 0;
+      transform: rotate(180deg); }
+  .table th.selected .carrot {
+    opacity: 1;
+    color: #D76381; }
+  .table th:hover {
+    background: #F8FAFC; }
+    .table th:hover .carrot {
+      opacity: 1; }
+  .table th.settings {
+    padding: 0;
+    width: 20px;
+    color: #D76381;
+    text-align: center;
+    position: relative;
+    user-select: none; }
+    .table th.settings button {
+      color: inherit;
+      background: none;
+      border: none;
+      font-size: 24px; }
+      .table th.settings button:focus {
+        outline: none; }
+      .table th.settings button::after {
+        position: relative;
+        content: "...";
+        top: -0.3em; }
+    .table th.settings .menu {
+      text-align: left;
+      background: white;
+      color: #5C5D6F;
+      border: 1px solid #DDD;
+      position: absolute;
+      top: 100%;
+      right: 1px;
+      margin: 0;
+      padding: 5px;
+      list-style: none;
+      z-index: 1;
+      white-space: nowrap;
+      font-size: 13px; }
+      .table th.settings .menu li {
+        margin: 0;
+        padding: 4px 10px; }
+        .table th.settings .menu li input {
+          display: inline-block; }
+
+.table td {
+  padding: 8px 25px; }
+
+.table tr:nth-child(even) td {
+  background: #F8FAFC; }
+
+.table tr:last-child td {
+  border-bottom: none; }

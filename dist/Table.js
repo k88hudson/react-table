@@ -166,15 +166,20 @@ exports.default = _react2.default.createClass({
             'Total'
           ),
           fields.slice(1).map(function (field) {
-            var sum = field.sum && rows.map(function (r) {
-              return field.raw(r);
-            }).reduce(function (a, b) {
-              return field.sum(a, b);
-            });
+            var summary = undefined;
+            if (field.summary) {
+              summary = field.summary(rows);
+            } else if (field.sum) {
+              summary = field.sum && rows.map(function (r) {
+                return field.raw(r);
+              }).reduce(function (a, b) {
+                return field.sum(a, b);
+              });
+            }
             return _react2.default.createElement(
               'th',
               { key: field.key, hidden: _this.isHidden(field.key) },
-              sum
+              summary
             );
           }),
           _react2.default.createElement('th', { hidden: !this.props.fieldsEditable })
